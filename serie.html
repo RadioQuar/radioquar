@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Serie Podcast</title>
+
+<style>
+
+/* ==========================================================
+   RESET
+========================================================== */
+
+*{
+
+    box-sizing:border-box;
+
+}
+
+body{
+
+    margin:0;
+
+    font-family:system-ui,sans-serif;
+
+    background:#f5f1e8;
+
+    color:#222;
+
+}
+
+/* ==========================================================
+   LAYOUT
+========================================================== */
+
+.rq-series-page{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:40px;
+
+}
+
+.rq-back-link{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-bottom:32px;
+
+    color:#3f6f4a;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    font-size:18px;
+
+    transition:.25s;
+
+}
+
+.rq-back-link:hover{
+
+    color:#2d5136;
+
+}
+
+
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.rq-series-header{
+
+    display:grid;
+
+    grid-template-columns:260px 1fr;
+
+    gap:48px;
+
+    align-items:center;
+
+    margin-bottom:70px;
+
+}
+
+#rq-series-cover img{
+
+    width:100%;
+
+    display:block;
+
+    border-radius:22px;
+
+    box-shadow:0 18px 40px rgba(0,0,0,.18);
+
+}
+
+.rq-series-info{
+
+    flex:1;
+
+}
+
+.rq-series-info h1{
+
+    margin:0;
+
+    font-size:56px;
+
+    line-height:1.05;
+
+    font-weight:800;
+
+}
+
+.rq-series-info p{
+
+    margin-top:18px;
+
+    font-size:22px;
+
+    color:#555;
+
+    line-height:1.5;
+
+}
+
+/* ==========================================================
+   EPISODI
+========================================================== */
+
+#rq-series-episodes{
+
+    display:grid;
+
+    gap:24px;
+
+}
+
+.rq-episode-card{
+
+    display:flex;
+
+    gap:20px;
+
+    padding:18px;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+
+}
+
+.rq-episode-card img{
+
+    width:140px;
+
+    border-radius:12px;
+
+}
+
+.rq-episode-card h3{
+
+    margin:0 0 16px;
+
+}
+
+.rq-episode-card button{
+
+    padding:10px 18px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#3f6f4a;
+
+    color:#fff;
+
+    cursor:pointer;
+
+}
+
+.rq-series-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:10px;
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    background:#ffffff;
+
+    box-shadow:0 6px 16px rgba(0,0,0,.08);
+
+    color:#3f6f4a;
+
+    font-weight:700;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="rq-series-page">
+
+    <a
+    href="podcast-rc22.html"
+    class="rq-back-link">
+
+    ← Torna alle serie
+
+</a>
+
+    <header class="rq-series-header">
+
+        <div id="rq-series-cover"></div>
+
+        <div class="rq-series-info">
+
+            <h1 id="rq-series-title">
+
+                Caricamento...
+
+            </h1>
+
+            <p id="rq-series-description"></p>
+
+            <p id="rq-series-count"></p>
+
+        </div>
+
+    </header>
+
+    <section id="rq-series-episodes">
+
+    </section>
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const seriesId = params.get("id");
+
+async function loadSeries() {
+
+    try {
+
+        const response = await fetch(
+            `https://news.radioquar.com/wp-json/wp/v2/series/${seriesId}`
+        );
+
+        if (!response.ok) {
+
+            throw new Error(`HTTP ${response.status}`);
+
+        }
+
+        const series = await response.json();
+
+        renderSeries(series);
+        await loadEpisodes();
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+function renderSeries(series) {
+
+    document.getElementById("rq-series-title").textContent =
+        series.name;
+
+    document.getElementById("rq-series-description").textContent =
+        series.description;
+
+    document.getElementById("rq-series-count").innerHTML =
+
+    `<span class="rq-series-badge">
+
+        🎧 ${series.count} episodi
+
+    </span>`;
+
+    document.getElementById("rq-series-cover").innerHTML =
+        `<img src="${series.image}" alt="${series.name}">`;
+
+}
+
+/* ==========================================================
+   LOAD EPISODES
+========================================================== */
+
+async function loadEpisodes() {
+
+    try {
+
+        const response = await fetch(
+
+            `https://news.radioquar.com/wp-json/wp/v2/podcast?series=${seriesId}&per_page=100`
+
+        );
+
+        if (!response.ok) {
+
+            throw new Error(`HTTP ${response.status}`);
+
+        }
+
+        const episodes = await response.json();
+
+        renderEpisodes(episodes);
+
+    }
+
+    catch (error) {
+
+        console.error("Errore episodi:", error);
+
+    }
+
+}
+
+/* ==========================================================
+   RENDER EPISODES
+========================================================== */
+
+function renderEpisodes(episodes){
+
+    const container =
+
+        document.getElementById(
+            "rq-series-episodes"
+        );
+
+    let html = "";
+
+    episodes.forEach(item => {
+
+        const cover =
+            item.meta.cover_image;
+
+        const title =
+            item.title.rendered.replace(
+                /^S\d+E\d+\s*[-–]\s*/i,
+                ""
+            );
+
+        html += `
+
+<article class="rq-episode-card">
+
+    <img
+        src="${cover}"
+        alt="${title}">
+
+    <div>
+
+        <h3>${title}</h3>
+
+        <button>
+
+            ▶ Ascolta
+
+        </button>
+
+    </div>
+
+</article>
+
+`;
+
+    });
+
+    container.innerHTML = html;
+
+}
+
+
+loadSeries();
+
+</script>
+
+</body>
+
+</html>
