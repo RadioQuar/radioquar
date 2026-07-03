@@ -42,6 +42,8 @@
          CSS
     ====================================================== -->
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 <style>
 
 /* ==========================================================
@@ -1857,6 +1859,120 @@ background:#fff;
 
 } 
 
+
+/* ======================================================
+   SEGUI RADIO QUAR
+====================================================== */
+
+.rq-social{
+
+    margin:70px auto 90px;
+
+}
+
+.rq-social-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(7,1fr);
+
+    gap:16px;
+
+    max-width:1120px;
+
+    margin:35px auto 0;
+
+}
+
+.rq-social-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:16px 10px;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    color:#2b2b2b;
+
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+
+    transition:.25s;
+
+    border:2px solid transparent;
+
+min-height:140px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+.rq-social-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 15px 30px rgba(0,0,0,.12);
+
+    border-color:#3f6f4a;
+
+}
+
+
+.rq-social-card:hover .rq-social-icon{
+
+    transform:scale(1.15);
+
+    transition:.25s;
+
+}
+
+.rq-social-icon{
+
+    font-size:1.8rem;
+
+    margin-bottom:15px;
+
+    color:#3f6f4a;
+
+    transition:.25s;
+
+}
+
+.rq-social-card:hover .rq-social-icon{
+
+    transform:scale(1.15);
+
+}
+
+.rq-social-card h3{
+
+    margin:0;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+}
+
+@media (max-width:768px){
+
+    .rq-social-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
 </style>
 
 </head>
@@ -1988,6 +2104,19 @@ background:#fff;
 
             </button>
 
+<div class="rq-volume">
+
+    <i class="fa-solid fa-volume-high"></i>
+
+ <input
+    type="range"
+    id="rq-volume"
+    min="0"
+    max="1"
+    step="0.01"
+    value="0.8">
+
+</div>
             <div class="rq-player-bottom">
 
     <span id="rq-player-mode">
@@ -2383,6 +2512,116 @@ background:#fff;
 </div>
 
 </section>
+
+
+<!-- ======================================================
+     SEGUI RADIO QUAR
+====================================================== -->
+
+<section class="rq-social">
+
+    <div class="rq-section-title">
+
+        <h2>🌍 Segui Radio Quar</h2>
+
+        <p>
+
+            Seguici sui social, scopri chi siamo e resta in contatto con noi.
+
+        </p>
+
+    </div>
+
+    <div class="rq-social-grid">
+
+        <a class="rq-social-card" href="https://news.radioquar.com/chi-siamo/" target="_blank">
+
+            <div class="rq-social-icon">
+
+    <i class="fa-solid fa-users"></i>
+
+</div>
+
+            <h3>Chi siamo</h3>
+
+        </a>
+
+        <a class="rq-social-card" href="https://bsky.app/" target="_blank">
+
+            <div class="rq-social-icon">
+
+    <i class="fa-brands fa-bluesky"></i>
+
+</div>
+
+            <h3>Bluesky</h3>
+
+        </a>
+
+        <a class="rq-social-card" href="https://mastodon.social/" target="_blank">
+
+            <div class="rq-social-icon">
+
+    <i class="fa-brands fa-mastodon"></i>
+
+</div>
+
+            <h3>Mastodon</h3>
+
+        </a>
+
+        <a class="rq-social-card" href="https://instagram.com/" target="_blank">
+
+            <<div class="rq-social-icon">
+
+    <i class="fa-brands fa-instagram"></i>
+
+</div>
+
+            <h3>Instagram</h3>
+
+        </a>
+
+        <a class="rq-social-card" href="https://facebook.com/" target="_blank">
+
+            <div class="rq-social-icon">
+
+    <i class="fa-brands fa-facebook"></i>
+
+</div>
+
+            <h3>Facebook</h3>
+
+        </a>
+
+        <a class="rq-social-card" href="https://x.com/" target="_blank">
+
+            <div class="rq-social-icon">
+
+    <i class="fa-brands fa-x-twitter"></i>
+
+</div>
+
+            <h3>X</h3>
+
+        </a>
+
+        <a class="rq-social-card" href="mailto:radioquar@bruttocarattere.org">
+
+            <div class="rq-social-icon">
+
+    <i class="fa-solid fa-envelope"></i>
+
+</div>
+
+            <h3>Email</h3>
+
+        </a>
+
+    </div>
+
+</section>
+
 
 
 
@@ -3090,6 +3329,16 @@ function initPlayer(){
     );
 
     APP.audio.preload = "none";
+
+    const volume = document.getElementById("rq-volume");
+
+APP.audio.volume = parseFloat(volume.value);
+
+volume.addEventListener("input", () => {
+
+    APP.audio.volume = parseFloat(volume.value);
+
+});
 
     const button =
         document.getElementById("rq-play");
