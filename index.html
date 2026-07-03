@@ -1632,6 +1632,231 @@ background:#fff;
 
 }
 
+/* ======================================================
+   IN PRIMO PIANO
+====================================================== */
+
+.rq-featured{
+
+    max-width:760px;
+
+    margin:60px auto;
+
+}
+
+.rq-section-title{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+.rq-section-title h2{
+
+    margin:0;
+
+    font-size:2rem;
+
+}
+
+.rq-section-title p{
+
+    color:#666;
+
+    margin-top:8px;
+
+}
+
+.rq-featured-grid{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:stretch;
+
+    gap:26px;
+
+    flex-wrap:wrap;
+
+}
+
+.rq-feature-card{
+
+    width:360px;
+
+    background:#fff;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    display:flex;
+
+    flex-direction:column;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.25s;
+
+}
+
+.rq-feature-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 18px 40px rgba(0,0,0,.12);
+
+}
+
+.rq-feature-card:hover img{
+
+    transform:scale(1.04);
+
+}
+
+.rq-feature-card img{
+
+    width:100%;
+
+    aspect-ratio:1 / 1;
+
+    object-fit:cover;
+
+    display:block;
+
+    background:#f3f3f3;
+
+}
+
+.rq-feature-body{
+
+    padding:20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+
+}
+
+.rq-feature-tag{
+
+    display:inline-block;
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    color:#fff;
+
+    font-size:.75rem;
+
+    font-weight:700;
+
+    margin-bottom:15px;
+
+}
+
+.rq-feature-tag.support{
+
+    background:#3f6f4a;
+
+}
+
+.rq-feature-tag.podcast{
+
+    background:#3b82f6;
+
+}
+
+.rq-feature-body h3{
+
+    margin:0 0 10px;
+
+    font-size:1.45rem;
+
+    line-height:1.3;
+
+}
+
+.rq-feature-body p{
+
+    color:#555;
+
+    font-size:.95rem;
+
+    line-height:1.55;
+
+    margin-bottom:18px;
+
+    flex:1;
+
+}
+
+.rq-feature-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:12px 20px;
+
+    border-radius:999px;
+
+    background:#3f6f4a;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+
+.rq-feature-btn:hover{
+
+    background:#31573a;
+
+}
+
+.rq-feature-card img{
+
+    width:100%;
+
+    aspect-ratio:1/1;
+
+    object-fit:cover;
+
+    display:block;
+
+    transition:.35s;
+
+}
+
+.rq-feature-card:hover img{
+
+    transform:scale(1.04);
+
+}
+
+@media(max-width:900px){
+
+    .rq-featured-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+} 
+
 </style>
 
 </head>
@@ -1924,6 +2149,128 @@ background:#fff;
 </div>
 
 </div>
+
+
+
+    </article>
+
+</section>
+
+<!-- ======================================================
+     IN PRIMO PIANO
+====================================================== -->
+
+<section class="rq-featured">
+
+    <div class="rq-section-title">
+
+        <h2>⭐ In primo piano</h2>
+
+        
+
+    </div>
+
+    <div class="rq-featured-grid">
+
+        <!-- =============================
+             CARD 1
+        ============================== -->
+
+        <article class="rq-feature-card">
+
+            <img
+                src="https://news.radioquar.com/wp-content/uploads/2026/06/week-2026-06-03T123806.281.jpg"
+                alt="Sostieni Radio Quar"
+                loading="lazy">
+
+            <div class="rq-feature-body">
+
+                <span class="rq-feature-tag support">
+
+                    ❤️ SOSTIENICI
+
+                </span>
+
+                <h3>
+
+                    Sostieni Radio Quar
+
+                </h3>
+
+                <p>
+
+                    Radio Quar è una radio indipendente,
+                    libera e completamente autofinanziata.
+
+                    Ogni contributo ci aiuta a realizzare
+                    nuovi podcast, musica e cultura.
+
+                </p>
+
+                <a
+                    href="https://news.radioquar.com/sostienici/"
+                    target="_blank"
+                    class="rq-feature-btn">
+
+                    Scopri come sostenerci →
+
+                </a>
+
+            </div>
+
+        </article>
+
+        <!-- =============================
+             CARD 2
+        ============================== -->
+
+        <article class="rq-feature-card">
+
+            <img
+                src="https://news.radioquar.com/wp-content/uploads/2026/06/5821362316560240034-1.jpg"
+                alt="Ponteradio"
+                loading="lazy">
+
+            <div class="rq-feature-body">
+
+                <span class="rq-feature-tag podcast">
+
+                    🎙 PODCAST
+
+                </span>
+
+                <h3>
+
+                    Ponteradio
+
+                </h3>
+
+                <p>
+
+                    Ogni venerdì Radio Quar partecipa
+                    alla rete delle radio indipendenti
+                    con approfondimenti, interviste
+                    e informazione dal basso.
+
+                </p>
+
+                <a
+                    href="https://news.radioquar.com/series/ponteradio/"
+                    target="_blank"
+                    class="rq-feature-btn">
+
+                    Ascolta ora →
+
+                </a>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
 
 <!-- ==========================================
      ARCHIVI PODCAST
