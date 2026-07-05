@@ -1,17 +1,8 @@
-
-
 /* ==========================================================
    RADIO QUAR 2.0
    BUILD 004.6
 ========================================================== */
 
-const API = {
-
-    nowPlaying: "https://radioquar.com/api/nowplaying/radio_quar",
-
-    schedule: "https://radioquar.com/api/station/1/schedule"
-
-};
 
 const APP = {
 
